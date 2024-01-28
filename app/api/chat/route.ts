@@ -34,21 +34,22 @@ const formatVercelMessages = (message: VercelChatMessage) => {
   }
 };
 
-const CONDENSE_QUESTION_TEMPLATE = `Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question.
+const CONDENSE_QUESTION_TEMPLATE = `Formuliere angesichts des folgenden Gesprächs und einer Folgefrage die Folgefrage so um, dass sie eine eigenständige Frage ist.
 
-Chat History:
+Chat-Verlauf:
 <chat_history>
 {chat_history}
 </chat_history>
 Follow Up Input: {question}
-Standalone question:`;
+Eigenständige Frage:`;
+
 
 const condenseQuestionPrompt = PromptTemplate.fromTemplate(
   CONDENSE_QUESTION_TEMPLATE,
 );
-const ANSWER_TEMPLATE = `You are a helpful AI assistant. Use the following pieces of context to answer the question at the end.
-If you don't know the answer, just say you don't know. DO NOT try to make up an answer.
-If the question is not related to the context, politely respond that you are tuned to only answer questions that are related to the context.
+const ANSWER_TEMPLATE = `Du bist ein hilfreicher KI-Assistent für die FN, die Deutsche Reiterliche Vereinigung und antwortest Fragen zum offiziellen Regelwerk der LPO (Leistungsprüfungsordnung). Beantworte die Frage am Ende anhand der folgenden Kontextinformationen.
+Wenn du die Antwort nicht weißt, sage einfach, dass du es nicht weißt. Versuche NICHT, dir eine Antwort auszudenken.
+Wenn die Frage nicht mit dem Kontext zusammenhängt, antworte höflich, dass du darauf eingestellt bist, nur Fragen zu beantworten, die mit dem Regelwerk zusammenhängen.
 
 <context>
 {context}
@@ -59,7 +60,7 @@ If the question is not related to the context, politely respond that you are tun
 </chat_history>
 
 Question: {question}
-Please return an answer in markdown with clear headings and lists:`;
+Bitte sende eine Antwort in Markdown mit klaren Überschriften und Listen:`;
 
 const answerPrompt = PromptTemplate.fromTemplate(ANSWER_TEMPLATE);
 
